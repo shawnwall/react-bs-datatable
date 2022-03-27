@@ -4,7 +4,7 @@ const config: Config.InitialOptions = {
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   setupFilesAfterEnv: ['./setupTests.ts'],
   // Disable this to test all test files.
-  // testMatch: ['./**/__stories__/00-Uncontrolled.test.tsx'],
+  testMatch: ['./**/helpers/header-groups.test.ts'],
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest'

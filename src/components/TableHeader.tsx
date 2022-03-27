@@ -8,13 +8,14 @@ import {
   SortType,
   CheckboxState,
   CheckboxOnChange,
-  SortOnChange
+  SortOnChange,
 } from '../helpers/types';
 import {
   getNextCheckboxState,
   GetNextCheckboxStateParams
 } from '../helpers/checkbox';
 import { getNextSortState } from '../helpers/data';
+import { TableHeaderGroups } from '../helpers/header-groups';
 
 /**
  * This is an interface for customizing the classes for
@@ -28,13 +29,14 @@ export interface TableHeaderClasses {
   /** The class for the `th` tags inside each `tr` tag. */
   th?: string;
 }
-
 /**
  * This is an interface for `TableHeader` component props.
  */
 export interface TableHeaderProps {
   /** Customize the classes of the `TableHeader` component. */
   classes?: TableHeaderClasses;
+  /** Group table headers. */
+  headerGroups?: TableHeaderGroups;
   /** Props to make the component controlled. */
   controlledProps?: {
     /** The function fired when the table sort state changes. */
@@ -59,7 +61,7 @@ export interface TableHeaderProps {
 /**
  * Renders a list of table headers.
  */
-export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
+export function TableHeader({ classes, headerGroups, controlledProps }: TableHeaderProps) {
   const headings = [];
   const {
     headers,
@@ -156,9 +158,7 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
         <Form.Group controlId={`table-selection-all`}>
           <Form.Label className="visually-hidden">
             {nextCheckboxType === 'add'
-              ? `Add ${
-                  data.length - numberOfSelectedRowsInCurrentPage
-                } rows to selection`
+              ? `Add ${data.length - numberOfSelectedRowsInCurrentPage} rows to selection`
               : `Remove ${numberOfSelectedRowsInCurrentPage} rows from selection`}
           </Form.Label>
           <Form.Check
@@ -210,3 +210,4 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
     </thead>
   );
 }
+
